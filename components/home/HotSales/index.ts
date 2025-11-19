@@ -1,0 +1,1 @@
+export { HotSales } from "./HotSales";
