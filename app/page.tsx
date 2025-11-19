@@ -5,6 +5,8 @@ import { HotSales } from "@/components/home/HotSales";
 import { FeaturedStore } from "@/components/home/FeaturedStore";
 import { FeaturedDeals } from "@/components/home/FeaturedDeals";
 import { SpecialOffers } from "@/components/home/SpecialOffers";
+import { TopBrands } from "@/components/home/TopBrands";
+import { Testimonials } from "@/components/home/Testimonials/Testimonials";
 
 export default function Home() {
   // Sample product data
@@ -91,6 +93,8 @@ export default function Home() {
         title="Best selling products this week"
       />
       <SpecialOffers />
+      <TopBrands />
+      <Testimonials />
     </main>
   );
 }

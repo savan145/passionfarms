@@ -73,3 +73,6 @@ export interface NewsletterSubscription {
   email: string;
   subscribedAt: Date;
 }
+
+// TopBrands Component Types
+export { type Brand, type TopBrandsProps } from "./TopBrands";
