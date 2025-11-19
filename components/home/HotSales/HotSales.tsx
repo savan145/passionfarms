@@ -52,11 +52,7 @@ export const HotSales = () => {
             <div key={item.id} className="group w-full">
               {/* Card Container */}
               <div
-                className={`relative w-full h-[280px] sm:h-[320px] lg:h-[350px] rounded-[10px] overflow-hidden cursor-pointer transition-all duration-300 ${
-                  item.hasYellowBorder
-                    ? "border-2 border-[#F0BA43] shadow-[0px_16px_32px_-4px_rgba(12,12,13,0.1),0px_4px_4px_-4px_rgba(12,12,13,0.05)]"
-                    : "shadow-[0px_1px_4px_rgba(12,12,13,0.1),0px_1px_4px_rgba(12,12,13,0.05)]"
-                } hover:border-2 hover:border-[#F0BA43] hover:shadow-[0px_16px_32px_-4px_rgba(12,12,13,0.1),0px_4px_4px_-4px_rgba(12,12,13,0.05)]`}
+                className={`relative w-full h-[280px] sm:h-[320px] lg:h-[350px] rounded-[10px] overflow-hidden cursor-pointer transition-all duration-300 ${"shadow-[0px_1px_4px_rgba(12,12,13,0.1),0px_1px_4px_rgba(12,12,13,0.05)]"} hover:border-2 hover:border-[#F0BA43] hover:shadow-[0px_16px_32px_-4px_rgba(12,12,13,0.1),0px_4px_4px_-4px_rgba(12,12,13,0.05)]`}
               >
                 {/* Background Image */}
                 <div className="absolute inset-0 w-full h-full">
