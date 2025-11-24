@@ -7,6 +7,7 @@ import { FeaturedDeals } from "@/components/home/FeaturedDeals";
 import { SpecialOffers } from "@/components/home/SpecialOffers";
 import { TopBrands } from "@/components/home/TopBrands";
 import { Testimonials } from "@/components/home/Testimonials/Testimonials";
+import { FAQ } from "@/components";
 
 export default function Home() {
   // Sample product data
@@ -95,6 +96,7 @@ export default function Home() {
       <SpecialOffers />
       <TopBrands />
       <Testimonials />
+      <FAQ />
     </main>
   );
 }
