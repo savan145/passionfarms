@@ -54,7 +54,7 @@ export const AvailableNow = ({
   viewAllButtonText = "View all products",
   backgroundColor = "white",
   gridColumns = {
-    mobile: 1,
+    mobile: 2,
     tablet: 2,
     desktop: 4,
   },
@@ -96,7 +96,7 @@ export const AvailableNow = ({
 
   // Dynamic grid classes based on gridColumns prop
   const getGridClasses = () => {
-    const { mobile = 1, tablet = 2, desktop = 4 } = gridColumns;
+    const { mobile = 2, tablet = 2, desktop = 4 } = gridColumns;
     const mobileClass = `grid-cols-${mobile}`;
     const tabletClass =
       tablet === 2
@@ -169,7 +169,7 @@ export const AvailableNow = ({
 
         {/* View All Products Button */}
         {showViewAllButton && (
-          <div className="flex justify-end">
+          <div className="flex justify-center lg:justify-end">
             <button
               onClick={handleViewAll}
               className="min-w-[200px] h-[50px] px-8 bg-[#F0BA43] rounded-[40px] text-[#1D1D1D] text-base font-medium leading-9 tracking-[-0.02em] hover:bg-[#F0BA43]/90 transition-colors shadow-[0px_10px_48px_rgba(5,6,15,0.1)]"

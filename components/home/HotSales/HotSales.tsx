@@ -36,7 +36,7 @@ export const HotSales = () => {
   ];
 
   return (
-    <section className="w-full bg-white py-12 lg:py-16">
+    <section className="w-full bg-white py-4 lg:py-16">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[35px]">
         {/* Section Title */}
         <h2

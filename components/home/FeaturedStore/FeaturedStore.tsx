@@ -48,7 +48,7 @@ export const FeaturedStore = () => {
   ];
 
   return (
-    <section className="w-full bg-white py-12 lg:py-16">
+    <section className="w-full bg-white py-6 lg:py-16">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[35px]">
         {/* Section Title */}
         <h2
@@ -58,12 +58,12 @@ export const FeaturedStore = () => {
           Featured Store
         </h2>
 
-        {/* Stores Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
+        {/* Stores Grid - 2 columns on mobile, 4 on desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
           {stores.map((store) => (
             <div
               key={store.id}
-              className="w-full max-w-[328px] mx-auto h-[239px] bg-[#F6F6F6] rounded-[10px] shadow-[0px_1px_4px_rgba(12,12,13,0.1),0px_1px_4px_rgba(12,12,13,0.05)] overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300"
+              className="w-full h-[239px] bg-[#F6F6F6] rounded-[10px] shadow-[0px_1px_4px_rgba(12,12,13,0.1),0px_1px_4px_rgba(12,12,13,0.05)] overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300"
             >
               {/* Banner Image */}
               <div className="relative w-full h-[94px]">
@@ -88,22 +88,22 @@ export const FeaturedStore = () => {
               </div>
 
               {/* Store Info */}
-              <div className="px-6 pt-3 pb-4">
+              <div className="px-3 sm:px-6 pt-3 pb-4">
                 <h3
-                  className="text-[#000000] text-base font-semibold leading-[22px] tracking-[-0.02em] uppercase mb-2"
+                  className="text-[#000000] text-sm sm:text-base font-semibold leading-[22px] tracking-[-0.02em] uppercase mb-2 truncate"
                   style={{ fontFamily: "Inter, sans-serif" }}
                 >
                   {store.name}
                 </h3>
                 <p
-                  className="text-[#1D1D1D] text-base font-normal leading-[22px] tracking-[-0.02em] mb-1"
+                  className="text-[#1D1D1D] text-xs sm:text-base font-normal leading-[22px] tracking-[-0.02em] mb-1"
                   style={{ fontFamily: "Inter, sans-serif" }}
                 >
                   Sale {store.productsCount} Products
                 </p>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 sm:gap-2">
                   {/* Yellow Dot Indicator */}
-                  <div className="w-[14px] h-[14px] bg-[#F0BA43] rounded-full flex items-center justify-center">
+                  <div className="w-[14px] h-[14px] bg-[#F0BA43] rounded-full flex items-center justify-center flex-shrink-0">
                     <svg
                       width="8"
                       height="8"
@@ -121,7 +121,7 @@ export const FeaturedStore = () => {
                     </svg>
                   </div>
                   <p
-                    className="text-[#1D1D1D] text-base font-normal leading-[22px] tracking-[-0.02em]"
+                    className="text-[#1D1D1D] text-xs sm:text-base font-normal leading-[22px] tracking-[-0.02em]"
                     style={{ fontFamily: "Inter, sans-serif" }}
                   >
                     Delivery in {store.deliveryTime}

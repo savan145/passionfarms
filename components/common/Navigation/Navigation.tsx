@@ -20,19 +20,6 @@ export const Navigation = () => {
 
   return (
     <>
-      {/* Yellow Banner */}
-      <div className="w-full bg-[#F0BA43]">
-        <div className="max-w-[1440px] mx-auto px-3 sm:px-4 md:px-6 lg:px-11 py-2.5">
-          <p
-            className="text-center text-[#1D1D1D] text-sm sm:text-base font-normal tracking-[-0.02em]"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
-            Join <span className="font-semibold">Passion farms !</span>
-          </p>
-        </div>
-      </div>
-
-      {/* Navigation Links */}
       <nav className="w-full bg-white border-b border-gray-200">
         <div className="max-w-[1440px] mx-auto px-3 sm:px-4 md:px-6 lg:px-11">
           <div className="flex items-center h-[50px] sm:h-[54px] gap-4 md:gap-6 lg:gap-8">

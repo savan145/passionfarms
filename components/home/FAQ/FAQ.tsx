@@ -74,7 +74,7 @@ We are growing responsibly in each state according to local laws and regulations
   showSearch = true,
   showLoadMore = true,
   initialDisplayCount = 6,
-  sectionClassName = "w-full bg-white py-16 lg:py-24",
+  sectionClassName = "w-full bg-white py-6 lg:py-6",
   containerClassName = "max-w-[1138px] mx-auto px-4 sm:px-6 lg:px-8",
   titleClassName = "text-[#1D1D1D] text-2xl lg:text-[28px] font-semibold leading-9 text-center tracking-[-0.02em]",
   descriptionClassName = "text-[#1D1D1D] text-base font-normal leading-9 text-center tracking-[-0.02em] mt-3 max-w-[822px] mx-auto",

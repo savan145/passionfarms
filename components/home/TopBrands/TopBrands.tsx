@@ -88,12 +88,44 @@ export const TopBrands = ({
 
       <div className={containerClassName}>
         {/* Section Title */}
-        <h2 className={titleClassName} style={{ fontFamily: "Inter, sans-serif" }}>
+        <h2
+          className={titleClassName}
+          style={{ fontFamily: "Inter, sans-serif" }}
+        >
           {title}
         </h2>
 
-        {/* Brands Grid */}
-        <div className={brandGridClassName}>
+        {/* Brands Grid - Scrollable on Mobile, Grid on Desktop */}
+        <div className="lg:hidden overflow-x-auto scrollbar-hide -mx-4 sm:-mx-6">
+          <div className="flex gap-6 px-4 sm:px-6 pb-2">
+            {brands.map((brand) => (
+              <div
+                key={brand.id}
+                className="flex items-center justify-center flex-shrink-0 w-[150px] sm:w-[180px] h-[120px]"
+              >
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <Image
+                    src={brand.logo}
+                    alt={brand.name}
+                    width={brand.width}
+                    height={brand.height}
+                    quality={100}
+                    style={{
+                      width: "auto",
+                      height: "auto",
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop Grid */}
+        <div className={`hidden lg:grid ${brandGridClassName}`}>
           {brands.map((brand) => (
             <div
               key={brand.id}

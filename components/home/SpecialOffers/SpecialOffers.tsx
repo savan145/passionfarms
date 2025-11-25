@@ -34,8 +34,31 @@ export const SpecialOffers = () => {
           Special offers
         </h2>
 
-        {/* Offers Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+        {/* Offers Grid - Scrollable on Mobile, Grid on Desktop */}
+        {/* Mobile Scrollable View */}
+        <div className="lg:hidden overflow-x-auto scrollbar-hide -mx-4 sm:-mx-6">
+          <div className="flex gap-4 px-4 sm:px-6 pb-2">
+            {offers.map((offer) => (
+              <div
+                key={offer.id}
+                className="w-[280px] sm:w-[350px] h-[350px] flex-shrink-0 rounded-[10px] shadow-[0px_1px_4px_rgba(12,12,13,0.1),0px_1px_4px_rgba(12,12,13,0.05)] overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="relative w-full h-full">
+                  <Image
+                    src={offer.image}
+                    alt={`Special Offer ${offer.id}`}
+                    fill
+                    className="object-cover"
+                    sizes="350px"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop Grid View */}
+        <div className="hidden lg:grid grid-cols-3 gap-5">
           {offers.map((offer) => (
             <div
               key={offer.id}
@@ -47,7 +70,7 @@ export const SpecialOffers = () => {
                   alt={`Special Offer ${offer.id}`}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 443px"
+                  sizes="443px"
                 />
               </div>
             </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
@@ -25,11 +25,8 @@ export interface TestimonialsProps {
   cardsContainerClassName?: string;
   cardClassName?: string;
   navigationClassName?: string;
-  visibleCards?: number;
   showNavigation?: boolean;
 }
-
-const DEFAULT_VISIBLE_CARDS = 3;
 
 export const Testimonials = ({
   title = "Testimonials",
@@ -79,36 +76,67 @@ export const Testimonials = ({
       highlightedText: "high-quality",
     },
   ],
-  sectionClassName = "w-full bg-white py-16 lg:py-24 relative",
+  sectionClassName = "w-full bg-white py-6 lg:py-8 relative",
   containerClassName = "max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[35px]",
-  titleClassName = "text-[#1D1D1D] text-xl lg:text-[28px] font-semibold leading-9 tracking-[-0.02em] text-center",
-  subtitleClassName = "text-[#1D1D1D] text-2xl lg:text-[30px] font-semibold leading-9 tracking-[-0.02em] text-center mt-2",
-  descriptionClassName = "text-[#878787] text-base lg:text-lg font-semibold leading-9 tracking-[-0.02em] text-center mt-4 mb-12",
-  cardsContainerClassName = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12",
-  cardClassName = "bg-white rounded-[10px] shadow-[0px_10px_48px_rgba(5,6,15,0.1)] p-6 lg:p-8",
-  navigationClassName = "flex items-center justify-center gap-4",
-  visibleCards = DEFAULT_VISIBLE_CARDS,
+  titleClassName = "text-[#1D1D1D] text-sm lg:text-[28px] font-semibold leading-6 lg:leading-9 tracking-[-0.02em] text-center",
+  subtitleClassName = "text-[#1D1D1D] text-lg sm:text-xl lg:text-[30px] font-semibold leading-7 lg:leading-9 tracking-[-0.02em] text-center mt-2",
+  descriptionClassName = "text-[#878787] text-sm sm:text-base lg:text-lg font-semibold leading-6 lg:leading-9 tracking-[-0.02em] text-center mt-3 sm:mt-4 mb-8 lg:mb-12",
+  cardsContainerClassName = "w-full mb-8 lg:mb-12",
+  cardClassName = "bg-white rounded-[10px] shadow-[0px_10px_48px_rgba(5,6,15,0.1)] p-4 sm:p-6 lg:p-8 flex flex-col h-full",
+  navigationClassName = "flex items-center justify-center gap-2 sm:gap-4 flex-wrap",
   showNavigation = true,
 }: TestimonialsProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [screenSize, setScreenSize] = useState("lg");
+
+  // Determine visible cards based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setScreenSize("mobile");
+      } else if (window.innerWidth < 1024) {
+        setScreenSize("tablet");
+      } else {
+        setScreenSize("lg");
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const visibleCards = useMemo(() => {
+    if (screenSize === "mobile") return 1;
+    if (screenSize === "tablet") return 2;
+    return 3;
+  }, [screenSize]);
+
+  // Calculate total pages
+  const totalPages = Math.max(1, testimonials.length - visibleCards + 1);
 
   const handlePrev = useCallback(() => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? testimonials.length - visibleCards : prev - 1
-    );
-  }, [testimonials.length, visibleCards]);
+    setCurrentIndex((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+  }, [totalPages]);
 
   const handleNext = useCallback(() => {
-    setCurrentIndex((prev) =>
-      prev === testimonials.length - visibleCards ? 0 : prev + 1
-    );
-  }, [testimonials.length, visibleCards]);
+    setCurrentIndex((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
+  }, [totalPages]);
 
   // Get visible testimonials
-  const visibleTestimonials = testimonials.slice(
-    currentIndex,
-    currentIndex + visibleCards
-  );
+  const visibleTestimonials = useMemo(() => {
+    const start = currentIndex;
+    const end = start + visibleCards;
+
+    if (end <= testimonials.length) {
+      return testimonials.slice(start, end);
+    }
+
+    return [
+      ...testimonials.slice(start),
+      ...testimonials.slice(0, end - testimonials.length),
+    ];
+  }, [currentIndex, visibleCards, testimonials]);
 
   // Highlight specific text in testimonial
   const renderHighlightedText = (text: string, highlight?: string) => {
@@ -134,7 +162,7 @@ export const Testimonials = ({
     <section className={sectionClassName}>
       <div className={containerClassName}>
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 lg:mb-12">
           <p
             className={titleClassName}
             style={{ fontFamily: "Inter, sans-serif" }}
@@ -157,73 +185,73 @@ export const Testimonials = ({
 
         {/* Testimonial Cards */}
         <div className={cardsContainerClassName}>
-          {visibleTestimonials.map((testimonial) => (
-            <div key={testimonial.id} className={cardClassName}>
-              {/* User Info */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="relative w-[58px] h-[58px] rounded-full overflow-hidden border border-[#E8E8E8]">
-                  <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    width={58}
-                    height={58}
-                    className="w-full h-full object-cover"
-                  />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+            {visibleTestimonials.map((testimonial) => (
+              <div key={testimonial.id} className={cardClassName}>
+                {/* User Info */}
+                <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                  <div className="relative w-12 h-12 sm:w-[58px] sm:h-[58px] rounded-full overflow-hidden border border-[#E8E8E8] flex-shrink-0">
+                    <Image
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      width={58}
+                      height={58}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <h3
+                      className="text-[#1D1D1D] font-semibold text-sm sm:text-base leading-6 sm:leading-7 tracking-[-0.02em] truncate"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      {testimonial.name}
+                    </h3>
+                  </div>
                 </div>
-                <div>
-                  <h3
-                    className="text-[#1D1D1D] font-semibold text-base leading-7 tracking-[-0.02em]"
-                    style={{ fontFamily: "Inter, sans-serif" }}
-                  >
-                    {testimonial.name}
-                  </h3>
+
+                {/* Testimonial Text */}
+                <p
+                  className="text-[#1D1D1D] text-sm sm:text-base leading-6 sm:leading-7 tracking-[-0.02em] mb-4 sm:mb-6 line-clamp-4 flex-grow"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  &quot;
+                  {renderHighlightedText(
+                    testimonial.text,
+                    testimonial.highlightedText
+                  )}
+                  &quot;
+                </p>
+
+                {/* Quote Icon */}
+                <div className="flex justify-center mt-auto">
+                  <div className="w-12 h-12 sm:w-[58px] sm:h-[58px] bg-white border border-[#E8E8E8] rounded-full flex items-center justify-center flex-shrink-0">
+                    <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-[#E8E8E8]" />
+                  </div>
                 </div>
               </div>
-
-              {/* Testimonial Text */}
-              <p
-                className="text-[#1D1D1D] text-base leading-7 tracking-[-0.02em] mb-6 line-clamp-4"
-                style={{ fontFamily: "Inter, sans-serif" }}
-              >
-                &quot;
-                {renderHighlightedText(
-                  testimonial.text,
-                  testimonial.highlightedText
-                )}
-                &quot;
-              </p>
-
-              {/* Quote Icon */}
-              <div className="flex justify-center">
-                <div className="w-[58px] h-[58px] bg-white border border-[#E8E8E8] rounded-full flex items-center justify-center">
-                  <Quote className="w-8 h-8 text-[#E8E8E8]" />
-                </div>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Navigation Controls */}
-        {showNavigation && (
+        {showNavigation && totalPages > 1 && (
           <div className={navigationClassName}>
             {/* Previous Button */}
             <button
               onClick={handlePrev}
-              className="w-[60px] h-[60px] rounded-full bg-white border-2 border-[#F0BA43] flex items-center justify-center hover:bg-[#F0BA43] transition-colors group"
+              className="w-12 h-12 sm:w-[60px] sm:h-[60px] rounded-full bg-white border-2 border-[#F0BA43] flex items-center justify-center hover:bg-[#F0BA43] transition-colors group flex-shrink-0"
               aria-label="Previous testimonials"
             >
-              <ChevronLeft className="w-7 h-7 text-[#343233] stroke-[2.5] group-hover:text-white" />
+              <ChevronLeft className="w-5 h-5 sm:w-7 sm:h-7 text-[#343233] stroke-[2.5] group-hover:text-white" />
             </button>
 
             {/* Dots Indicators */}
-            <div className="flex gap-3">
-              {Array.from({
-                length: testimonials.length - visibleCards + 1,
-              }).map((_, index) => (
+            <div className="flex gap-2 sm:gap-3">
+              {Array.from({ length: totalPages }).map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-4 h-4 rounded-full transition-all ${
+                  className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all ${
                     index === currentIndex ? "bg-[#F0BA43]" : "bg-[#D1D1D1]"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
@@ -234,10 +262,10 @@ export const Testimonials = ({
             {/* Next Button */}
             <button
               onClick={handleNext}
-              className="w-[60px] h-[60px] rounded-full bg-white border-2 border-[#F0BA43] flex items-center justify-center hover:bg-[#F0BA43] transition-colors group"
+              className="w-12 h-12 sm:w-[60px] sm:h-[60px] rounded-full bg-white border-2 border-[#F0BA43] flex items-center justify-center hover:bg-[#F0BA43] transition-colors group flex-shrink-0"
               aria-label="Next testimonials"
             >
-              <ChevronRight className="w-7 h-7 text-[#343233] stroke-[2.5] group-hover:text-white" />
+              <ChevronRight className="w-5 h-5 sm:w-7 sm:h-7 text-[#343233] stroke-[2.5] group-hover:text-white" />
             </button>
           </div>
         )}
@@ -245,3 +273,5 @@ export const Testimonials = ({
     </section>
   );
 };
+
+export default Testimonials;
