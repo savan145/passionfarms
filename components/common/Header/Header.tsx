@@ -8,7 +8,6 @@ import { useState } from "react";
 export const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
-  const [showMobileSearch, setShowMobileSearch] = useState(false);
 
   return (
     <header className="w-full bg-[#21465E] py-3 sm:py-4 lg:py-0 lg:h-[150px] relative overflow-hidden">
