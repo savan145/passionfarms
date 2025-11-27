@@ -8,9 +8,10 @@ import { useState } from "react";
 export const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
 
   return (
-    <header className="w-full bg-[#21465E] py-3 sm:py-4 lg:py-0 lg:h-[150px] relative overflow-hidden">
+    <header className="w-full bg-[#0a1a2f] py-3 sm:py-4 lg:py-0 lg:h-[150px] relative overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-2 sm:px-4 md:px-6 lg:px-11 relative h-full">
         <div className="flex flex-col lg:flex-row items-center lg:h-full gap-3 sm:gap-4 lg:gap-0">
           {/* Top Row - Mobile/Tablet */}

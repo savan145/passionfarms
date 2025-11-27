@@ -11,6 +11,7 @@ export { Header } from "./common/Header";
 export { Navigation } from "./common/Navigation";
 export { Footer } from "./common/Footer";
 export { default as AccountSidebar } from "./common/AccountSidebar";
+export { default as ProductCardComponent } from "./common/ProductCard";
 export { default as PageHeader } from "./common/PageHeader";
 
 // Home Page Components

@@ -1,0 +1,2 @@
+export { Pdetails } from './Pdetails';
+

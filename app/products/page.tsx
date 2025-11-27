@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { ChevronDown, Heart, ShoppingCart, Search, X } from "lucide-react";
+import { ChevronDown, Search, X } from "lucide-react";
+import { ProductCard } from "@/components/common/Card";
 
 interface FilterSidebarProps {
   showCategoryMore: boolean;
@@ -240,32 +241,75 @@ export default function ProductListPage() {
 
   const products = [
     {
-      id: 1,
-      name: "Frosted Donuts",
-      price: "$850.00 - $14,000.00",
+      id: "1",
+      image: "/images/products/placeholder.svg",
+      category: "Bulk Flowers",
+      title: "Frosted Donuts",
+      price: 850.0,
       rating: 4.4,
     },
-    { id: 2, name: "Italian Ice", price: "$850.00 - $14,000.00", rating: 4.4 },
-    { id: 3, name: "Warheads", price: "$1,400.00 - $1,500.00", rating: 4.4 },
     {
-      id: 4,
-      name: "Rainbow Poundcake",
-      price: "$1,525.00 - $1,625.00",
+      id: "2",
+      image: "/images/products/placeholder.svg",
+      category: "Bulk Flowers",
+      title: "Italian Ice",
+      price: 850.0,
       rating: 4.4,
     },
-    { id: 5, name: "Froyo", price: "$1,350.00 - $1,450.00", rating: 4.4 },
-    { id: 6, name: "Team Rocket", price: "$850.00 - $14,000.00", rating: 4.4 },
     {
-      id: 7,
-      name: "Blueberry nerdz",
-      price: "$1,400.00 - $1,500.00",
+      id: "3",
+      image: "/images/products/placeholder.svg",
+      category: "Bulk Flowers",
+      title: "Warheads",
+      price: 1400.0,
       rating: 4.4,
     },
-    { id: 8, name: "Papa Smurf", price: "$1,300.00 - $23,000.00", rating: 4.4 },
     {
-      id: 9,
-      name: "Cherry Pops",
-      price: "$1,025.00 - $17,500.00",
+      id: "4",
+      image: "/images/products/placeholder.svg",
+      category: "Bulk Flowers",
+      title: "Rainbow Poundcake",
+      price: 1525.0,
+      rating: 4.4,
+    },
+    {
+      id: "5",
+      image: "/images/products/placeholder.svg",
+      category: "Bulk Flowers",
+      title: "Froyo",
+      price: 1350.0,
+      rating: 4.4,
+    },
+    {
+      id: "6",
+      image: "/images/products/placeholder.svg",
+      category: "Bulk Flowers",
+      title: "Team Rocket",
+      price: 850.0,
+      rating: 4.4,
+    },
+    {
+      id: "7",
+      image: "/images/products/placeholder.svg",
+      category: "Bulk Flowers",
+      title: "Blueberry nerdz",
+      price: 1400.0,
+      rating: 4.4,
+    },
+    {
+      id: "8",
+      image: "/images/products/placeholder.svg",
+      category: "Bulk Flowers",
+      title: "Papa Smurf",
+      price: 1300.0,
+      rating: 4.4,
+    },
+    {
+      id: "9",
+      image: "/images/products/placeholder.svg",
+      category: "Bulk Flowers",
+      title: "Cherry Pops",
+      price: 1025.0,
       rating: 4.4,
     },
   ];
@@ -438,39 +482,19 @@ export default function ProductListPage() {
           {/* Product Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {products.map((product) => (
-              <div
-                key={product.id}
-                className="bg-gray-100 rounded-lg overflow-hidden hover:shadow-lg transition"
-              >
-                <div className="relative pb-full bg-gradient-to-br from-green-200 to-green-400 aspect-square flex items-center justify-center">
-                  <div className="absolute top-3 right-3 bg-yellow-400 rounded-full p-2 hover:bg-yellow-500 cursor-pointer">
-                    <Heart size={18} className="text-gray-900" />
-                  </div>
-                  <div className="text-center">
-                    <div className="text-6xl">🌿</div>
-                  </div>
-                  <div className="absolute bottom-3 right-3 bg-yellow-400 rounded-full p-2.5 hover:bg-yellow-500 cursor-pointer">
-                    <ShoppingCart size={18} className="text-gray-900" />
-                  </div>
-                </div>
-
-                <div className="p-4">
-                  <span className="text-xs text-gray-600">Bulk Flowers</span>
-                  <h3 className="font-semibold text-gray-900 mb-2">
-                    {product.name}
-                  </h3>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs md:text-sm font-medium text-gray-900">
-                      {product.price}
-                    </span>
-                    <div className="flex items-center gap-1">
-                      <span className="text-xs text-gray-900">
-                        {product.rating}
-                      </span>
-                      <span className="text-yellow-400">★★★★☆</span>
-                    </div>
-                  </div>
-                </div>
+              <div key={product.id} className="flex justify-center">
+                <ProductCard
+                  id={product.id}
+                  image={product.image}
+                  category={product.category}
+                  title={product.title}
+                  price={product.price}
+                  rating={product.rating}
+                  onAddToCart={() => console.log("Add to cart:", product.id)}
+                  onToggleFavorite={() =>
+                    console.log("Toggle favorite:", product.id)
+                  }
+                />
               </div>
             ))}
           </div>

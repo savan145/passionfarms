@@ -15,7 +15,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="w-full bg-[#21465E] overflow-hidden">
+    <footer className="w-full bg-[#0a1a2f] overflow-hidden">
       {/* Main Footer Content */}
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[73px] py-8 sm:py-12 lg:py-16">
         <div className="flex flex-col lg:grid lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">

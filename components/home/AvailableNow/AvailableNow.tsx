@@ -102,14 +102,14 @@ export const AvailableNow = ({
       tablet === 2
         ? "sm:grid-cols-2"
         : tablet === 3
-        ? "sm:grid-cols-3"
-        : "sm:grid-cols-4";
+          ? "sm:grid-cols-3"
+          : "sm:grid-cols-4";
     const desktopClass =
       desktop === 3
         ? "lg:grid-cols-3"
         : desktop === 4
-        ? "xl:grid-cols-4"
-        : "lg:grid-cols-2";
+          ? "xl:grid-cols-4"
+          : "lg:grid-cols-2";
     return `${mobileClass} ${tabletClass} lg:grid-cols-3 ${desktopClass}`;
   };
 
@@ -133,11 +133,10 @@ export const AvailableNow = ({
               <button
                 key={tab.id}
                 onClick={() => handleTabChange(tab.id)}
-                className={`min-w-[118px] h-9 px-4 rounded-[40px] text-base font-normal leading-9 tracking-[-0.02em] transition-all duration-300 ${
-                  activeTab === tab.id
+                className={`min-w-[118px] h-9 px-4 rounded-[40px] text-base font-normal leading-9 tracking-[-0.02em] transition-all duration-300 ${activeTab === tab.id
                     ? "bg-[#F0BA43] text-[#1D1D1D] shadow-[0px_10px_48px_rgba(5,6,15,0.1)]"
                     : "bg-white text-[#1D1D1D] border border-[rgba(187,187,187,0.73)]"
-                }`}
+                  }`}
                 style={{ fontFamily: "Inter, sans-serif" }}
               >
                 {tab.label}
@@ -148,7 +147,7 @@ export const AvailableNow = ({
 
         {/* Products Grid */}
         {products.length > 0 && (
-          <div className={`grid ${getGridClasses()} gap-4 lg:gap-[20px] mb-8`}>
+          <div className={`grid ${getGridClasses()} gap-4 lg:gap-5 mb-8`}>
             {products.map((product) => (
               <div key={product.id} className="flex justify-center">
                 <ProductCard

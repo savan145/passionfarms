@@ -87,7 +87,7 @@ export const ProductCard = ({
 }: ProductCardProps) => {
   return (
     <div
-      className={`relative w-full max-w-[328px] h-[381px] bg-[#F2F2F2] rounded-[10px] p-4 flex flex-col transition-all duration-300 hover:border-2 hover:border-[#F0BA43] ${className}`}
+      className={`relative w-full max-w-[328px] sm:h-[381px] bg-[#F2F2F2] rounded-[10px] p-4 flex flex-col transition-all duration-300 hover:border-2 hover:border-[#F0BA43] ${className}`}
     >
       {/* Favorite Button */}
       <button
@@ -96,14 +96,13 @@ export const ProductCard = ({
         aria-label="Add to favorites"
       >
         <Heart
-          className={`w-6 h-6 ${
-            isFavorite ? "fill-red-500 text-red-500" : "text-black"
-          } transition-colors`}
+          className={`w-6 h-6 ${isFavorite ? "fill-red-500 text-red-500" : "text-black"
+            } transition-colors`}
         />
       </button>
 
       {/* Product Image */}
-      <div className="relative w-full h-[197px] flex items-center justify-center mb-3">
+      <div className="relative w-full sm:h-[197px] flex items-center justify-center mb-3">
         <img
           src={image}
           alt={title}
@@ -112,18 +111,18 @@ export const ProductCard = ({
       </div>
 
       {/* Category */}
-      <p className="text-[#878787] text-base font-normal leading-6 tracking-[-0.02em] mb-0">
+      <p className="text-text-gray text-[10px] sm:text-base font-normal leading-4 sm:leading-6 tracking-[-0.02em] mb-0">
         {category}
       </p>
 
       {/* Title */}
-      <h3 className="text-[#1D1D1D] text-base font-semibold leading-[22px] tracking-[-0.02em] mb-2">
+      <h3 className="text-[#1D1D1D] text-[10px] sm:text-base font-semibold leading-3 sm:leading-[22px] tracking-[-0.02em] mb-2">
         {title}
       </h3>
 
       {/* Rating */}
       <div className="flex items-center gap-2 mb-2">
-        <span className="text-[#1D1D1D] text-xs font-medium leading-4 tracking-[-0.02em]">
+        <span className="text-[#1D1D1D] text-[10px] sm:text-xs font-medium leading-4 tracking-[-0.02em]">
           {rating.toFixed(1)}
         </span>
         <StarRating rating={rating} />
@@ -131,7 +130,7 @@ export const ProductCard = ({
 
       {/* Price and Cart Button */}
       <div className="flex items-center justify-between mt-auto">
-        <p className="text-[#1D1D1D] text-xl font-medium leading-9 tracking-[-0.02em]">
+        <p className="text-[#1D1D1D] text-lg sm:text-xl font-medium leading-9 tracking-[-0.02em]">
           ${" "}
           {price.toLocaleString("en-US", {
             minimumFractionDigits: 2,
@@ -142,10 +141,10 @@ export const ProductCard = ({
         {/* Add to Cart Button */}
         <button
           onClick={onAddToCart}
-          className="w-[50px] h-[50px] bg-[#F0BA43] rounded-full flex items-center justify-center hover:bg-[#e5af3a] transition-colors shadow-md"
+          className="sm:size-[50px] size-7 bg-[#F0BA43] rounded-full flex items-center justify-center hover:bg-[#e5af3a] transition-colors shadow-md"
           aria-label="Add to cart"
         >
-          <ShoppingCart className="w-6 h-6 text-[#080341]" />
+          <ShoppingCart className="size-4 sm:size-6 text-[#080341]" />
         </button>
       </div>
     </div>
@@ -170,7 +169,7 @@ export const Card: React.FC<CardProps> = ({
       className={cn(
         "bg-white dark:bg-gray-800 rounded-xl shadow-md p-6",
         hover &&
-          "transition-transform duration-300 hover:scale-105 hover:shadow-xl",
+        "transition-transform duration-300 hover:scale-105 hover:shadow-xl",
         className
       )}
     >

@@ -1,3 +1,7 @@
+import { Coffee } from "@/components/categories/Coffee";
+import { Pdetails } from "@/components/categories/Pdetails/Pdetails";
+import { SimilarItems } from "@/components/categories/SimilarItems/SimilarItems";
+import { SingleProductTab } from "@/components/categories/SingleProductTab/SingleProductTab";
 import React from "react";
 
 export default function ProductDetailsPage({
@@ -7,29 +11,18 @@ export default function ProductDetailsPage({
 }) {
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Product Images */}
-        <div>
-          <div className="aspect-square bg-gray-100 rounded-lg mb-4">
-            {/* Main product image */}
-          </div>
-          <div className="grid grid-cols-4 gap-2">{/* Thumbnail images */}</div>
-        </div>
+      <Pdetails />
+      <SingleProductTab />
+      <SimilarItems
+        title="Similar items Viewed products"
+        gridColumns={{ mobile: 2, tablet: 2, desktop: 4 }}
+      />
+      <SimilarItems
+        title="You may also like"
+        gridColumns={{ mobile: 2, tablet: 2, desktop: 4 }}
+      />
 
-        {/* Product Info */}
-        <div>
-          <h1 className="text-3xl font-bold mb-4">Product Name</h1>
-          <div className="mb-4">
-            <span className="text-2xl font-bold">$99.99</span>
-          </div>
-          <div className="mb-6">
-            <p className="text-gray-600">Product description goes here</p>
-          </div>
-          <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700">
-            Add to Cart
-          </button>
-        </div>
-      </div>
+      <Coffee />
     </div>
   );
 }

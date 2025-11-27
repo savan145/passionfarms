@@ -1,42 +1,41 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const accountLinks = [
-  { href: "/account/dashboard", label: "Dashboard" },
-  { href: "/account/orders", label: "Orders" },
-  { href: "/account/addresses", label: "Addresses" },
-  { href: "/account/payment-methods", label: "Payment Methods" },
-  { href: "/account/wishlist", label: "Wishlist" },
-  { href: "/account/gift-cards", label: "Gift Cards" },
-  { href: "/account/privacy", label: "Privacy & Security" },
+  { id: "dashboard", label: "Dashboard" },
+  { id: "orders", label: "Orders" },
+  { id: "addresses", label: "Addresses" },
+  { id: "paymentMethods", label: "Payment Methods" },
+  { id: "wishlist", label: "Wishlist" },
+  { id: "giftCards", label: "Gift Cards" },
+  { id: "privacy", label: "Privacy & Security" },
 ];
 
-export default function AccountSidebar() {
-  const pathname = usePathname();
+interface AccountSidebarProps {
+  activeTab: string;
+  onTabChange: (tab: string) => void;
+}
 
+export default function AccountSidebar({ activeTab, onTabChange }: AccountSidebarProps) {
   return (
-    <nav className="bg-white rounded-lg shadow p-4">
-      <ul className="space-y-2">
-        {accountLinks.map((link) => (
-          <li key={link.href}>
-            <Link
-              href={link.href}
-              className={cn(
-                "block px-4 py-2 rounded transition-colors",
-                pathname === link.href
-                  ? "bg-blue-600 text-white"
-                  : "hover:bg-gray-100"
-              )}
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <ul className="space-y-2">
+      {accountLinks.map((link) => (
+        <li key={link.id}>
+          <button
+            onClick={() => onTabChange(link.id)}
+            className={cn(
+              "w-full text-left px-4 py-2 rounded-[10px] transition-colors border border-[#bbbbbb]",
+              activeTab === link.id
+                ? "bg-[#F0BA43] border-[#f0ba43] text-white"
+                : "hover:bg-gray-100"
+            )}
+          >
+            {link.label}
+          </button>
+        </li>
+      ))}
+    </ul>
   );
 }
